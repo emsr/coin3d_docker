@@ -1,0 +1,9 @@
+sudo docker login localhost:8080
+
+sudo docker login hub.docker.com/r/emsr
+
+sudo docker image ls
+
+sudo docker tag coin3d emsr/coin3d
+
+sudo docker push emsr/coin3d
