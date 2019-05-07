@@ -1,10 +1,12 @@
-FROM emsr/gcc-cmake
+FROM rsggitlab.alionscience.com/esmith-rowland/gcc9-cmake
 
 WORKDIR /coin3d/
 
 RUN \
   apt update; \
   apt install -y \
+    apt-utils \
+    libboost-all-dev \
     graphviz \
     doxygen \
     mercurial \
@@ -19,22 +21,18 @@ RUN \
   cmake ../simage -G"Unix Makefiles"; \
   make; \
   make install; \
-  cd ..
-
-RUN \
+  cd ..; \
   hg clone https://bitbucket.org/Coin3D/coin; \
   mkdir coin_build; \
   cd coin_build; \
   cmake ../coin -G"Unix Makefiles"; \
   make; \
   make install; \
-  cd ..
-
-RUN \
+  cd ..; \
   hg clone https://bitbucket.org/Coin3D/soqt; \
   mkdir soqt_build; \
   cd soqt_build; \
   cmake ../soqt -G"Unix Makefiles"; \
   make; \
   make install; \
-  cd ..
+  cd ..;

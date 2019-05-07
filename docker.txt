@@ -1,3 +1,29 @@
+sudo docker login rsggitlab.alionscience.com/esmith-rowland
+
+# This can be referenced from UPM scripts.
+sudo docker build --rm -t "rsggitlab.alionscience.com/esmith-rowland/coin3d_docker" .
+sudo docker build --rm --no-cache -t "rsggitlab.alionscience.com/esmith-rowland/coin3d_docker" .
+
+# It's possible I could have a totally local thing.
+sudo docker build --rm -t coin3d_docker .
+sudo docker build --rm --no-cache -t coin3d_docker .
+
+# Remove local installs...
+sudo xargs rm -f < ???/install_manifest.txt
+
+# Remove dangling images
+sudo docker rmi -f $(sudo docker images --filter "dangling=true" -q --no-trunc)
+
+# snoop around...
+sudo docker run -it rsggitlab.alionscience.com/esmith-rowland/coin3d_docker
+# ... locally
+sudo docker run -it coin3d_docker
+
+# Kill all the things...
+sudo docker system prune
+
+==========================================
+
 sudo docker login localhost:8080
 
 sudo docker login hub.docker.com/r/emsr
@@ -7,3 +33,4 @@ sudo docker image ls
 sudo docker tag coin3d emsr/coin3d
 
 sudo docker push emsr/coin3d
+
